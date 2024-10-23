@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.html">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mi Equipo Pokémon</h1>
+    <div id="equipo-list"></div>
+    <button onclick="limpiarEquipo()">Limpiar Equipo</button>
+    <button onclick="window.location.href='index.html'">Volver atrás</button>
+ <script>
+        // Renderizar el equipo desde localStorage
+        const equipoList = document.getElementById('equipo-list');
+        const equipo = JSON.parse(localStorage.getItem('equipo')) || [];
+
+        equipo.forEach(pokemon => {
+            const card = document.createElement('div');
+            card.className = 'pokemon-card';
+            card.innerHTML = `
+                <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
+                <h3>${pokemon.nombre.toUpperCase()}</h3>
+            `;
+            equipoList.appendChild(card);
+        });
+
+        // Limpiar equipo
+        function limpiarEquipo() {
+            localStorage.removeItem('equipo');
+            alert('Tu equipo ha sido limpiado.');
+            window.location.reload();
+        }
+    </script>
+</body>
+
+</html>
